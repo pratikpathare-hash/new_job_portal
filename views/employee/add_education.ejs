@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Education Details</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">Education Details</h5>
+        </div>
+
+        <div class="card-body">
+          <form action="/employee/save_education" method="post">
+
+            <!-- Course Title -->
+            <div class="mb-3">
+              <label class="form-label">Course Title</label>
+              <input type="text" name="title" class="form-control" placeholder="BCA, MCA, B.Tech" required>
+            </div>
+
+            <!-- University -->
+            <div class="mb-3">
+              <label class="form-label">University</label>
+              <input type="text" name="univercity" class="form-control" placeholder="Savitribai Phule Pune University" required>
+            </div>
+
+            <!-- Passing Year -->
+            <div class="mb-3">
+              <label class="form-label">Passing Year</label>
+              <select name="passing_year" class="form-select" required>
+                <option value="">Select Year</option>
+                <option>2025</option>
+                <option>2024</option>
+                <option>2023</option>
+                <option>2022</option>
+                <option>2021</option>
+              </select>
+            </div>
+
+            <!-- Marks -->
+            <div class="mb-3">
+              <label class="form-label">Marks (%)</label>
+              <input type="number" name="marks" class="form-control" placeholder="Enter percentage" min="0" max="100" required>
+            </div>
+
+            <!-- Status -->
+            <div class="mb-3">
+              <label class="form-label">Status</label>
+              <select name="status" class="form-select" required>
+                <option value="">Select Status</option>
+                <option value="completed">Completed</option>
+                <option value="appearing">Appearing</option>
+              </select>
+            </div>
+
+            <!-- Submit -->
+            <div class="d-grid">
+
+              <button type="submit" class="btn btn-primary">
+                Save Education
+              </button>
+            </div>
+
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

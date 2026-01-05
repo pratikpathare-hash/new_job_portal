@@ -1,0 +1,29 @@
+<%- include("navbar.ejs") %>
+<div class="col-md-9">
+    <table class="table border table-hover table-striped ">
+        <tr>
+            <th>Sr No</th>
+            <th>Job Title</th>
+            <th>Company</th>
+            <th>Skills Required</th>
+            <th>location</th>
+            <th>Applied Date</th>
+            <th>Status</th>
+        </tr>
+        <% for(var i=0;i<applications.length;i++){ %>
+         <tr>
+            <td><%- i+1 %></td>
+            <td><%- applications[i].job_title %></td>
+            <td><%- applications[i].company_name %></td>
+            <td><%- applications[i].skill_require %></td>
+            <td><%- applications[i].location %></td>
+            <td><%- new Date(applications[i].created_at).toDateString() %></td>
+           
+
+            <td><%- applications[i].stage %></td>
+          </tr>
+        <% } %>
+    </table>
+</div>
+
+<%- include("footer.ejs") %>

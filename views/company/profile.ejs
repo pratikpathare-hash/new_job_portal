@@ -1,0 +1,125 @@
+<%- include("navbar.ejs") %>
+
+<div class="container mt-4">
+
+  <!-- Company Header -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-body d-flex align-items-center">
+      <img src="/logo/<%- data[0].logo %>" class="rounded border" width="100" height="100" onclick="profile('<%- data[0].logo %>')">
+      <div class="ms-3">
+        <h4 class="mb-1"><%- data[0].company_name %></h4>
+        <p class="mb-1 text-muted">-<%- data[0].industry %></p>
+        <span class="badge bg-success"><%- data[0].is_verified==1 ?'verified':'pending'  %></span>
+      </div>
+      <div class="ms-auto">
+        <a href="/company/edit_profile" class="btn btn-outline-primary btn-sm">
+          Edit Profile
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <!-- Left Section -->
+    <div class="col-md-8">
+
+      <!-- About Company -->
+      <div class="card mb-4">
+        <div class="card-header fw-bold">About Company</div>
+        <div class="card-body">
+          <p>
+            <%- data[0].about_company %>
+          </p>
+        </div>
+      </div>
+
+      <!-- Active Jobs -->
+      <div class="card">
+        <div class="card-header fw-bold">Active Jobs</div>
+        <table class="table mb-0">
+          <thead>
+            <tr>
+              <th>Job Title</th>
+              <th>Location</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for(var i=0;i<jobs.length;i++){ %>
+            <tr>
+              <td><%- jobs[i].job_title %></td>
+              <td><%- data[0].location %></td>
+              <td><span class="badge <%- jobs[i].status=='Inactive'?'bg-warning':'bg-success' %>"><%- jobs[i].status %></span></td>
+              <td>
+                <a href="/company/manage_job" class="btn btn-sm btn-outline-primary">View</a>
+              </td>
+            </tr>
+            <% } %>
+            
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+
+    <!-- Right Section -->
+    <div class="col-md-4">
+
+      <!-- Company Details -->
+      <div class="card mb-4">
+        <div class="card-header fw-bold">Company Details</div>
+        <div class="card-body">
+          <p><strong>Email:</strong> <%- data[0].company_name %></p>
+          <p><strong>Phone:</strong> +91 <%- data[0].hr_mobile %></p>
+          <p><strong>Location:</strong> <%- data[0].location %></p>
+          <p><strong>Website:</strong> <a href="#"><%- data[0].website_url %></a></p>
+        </div>
+      </div>
+
+      <!-- Company Stats -->
+      <div class="card">
+        <div class="card-header fw-bold">Company Stats</div>
+        <div class="card-body">
+          <p>Total Jobs: <strong><%- jobs.length %></strong></p>
+          <p>Total Applications: <strong><%- count[0].application_count %></strong></p>
+          <p>Shortlisted: <strong><%- count[0].shortlisted_count %></strong></p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+<form action="/company/update_profile_photo" method="post" enctype="multipart/form-data">
+<div class="modal" tabindex="-1" id="upload_photo">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Update Profile Photo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input type="text" name="logo" id="logo" hidden >
+         Upload Photo :- <br><br> 
+        <input type="file" name="profile_photo" class="form-control" >
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+</form>
+<Script>
+  function profile(logo)
+  { 
+    $("#logo").val(logo)
+    $("#upload_photo").modal("show")
+  }
+</Script>
+<%- include("footer.ejs") %>

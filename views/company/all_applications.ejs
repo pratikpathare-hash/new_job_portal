@@ -1,0 +1,80 @@
+<%- include("navbar.ejs") %>
+<h2>Applicants</h2>
+<br>
+<label>Select Job :-</label>
+<select id="jobs" onchange="change()" >
+    <option value="all">All</option>
+    <% for(var i=0;i<jobs.length;i++){ %>
+    <option value="<%- jobs[i].job_id %>"><%- jobs[i].job_title %></option>
+    <% } %>
+</select>
+
+
+<table class="table mt-4" id="applicant_table">
+    
+    
+</table>
+<script>
+    function change()
+    {
+        var job_id=document.getElementById("jobs").value;
+        var data =`<tr><th>Sr No</th><th>Employee Name</th><th>Employee Mobile</th><th>Employee Email</th><th>Resume</th><th>Status</th></tr>`
+        var emp = <%- JSON.stringify(emp) %>;
+        var no=1
+    for(i=0;i<emp.length;i++)
+    {
+        if( emp[i].job_id  == job_id)
+         { 
+            
+       data +=` <tr><td>${no}</td><td> ${emp[i].emp_name}</td><td> ${emp[i].emp_mobile} </td><td> ${emp[i].emp_email} </td><td><a href="/Resumes/${ emp[i].resume_file}"> ${emp[i].resume_file} </a></td> `
+            no++;
+      if( emp[i].stage =="applied")
+        { 
+            data += `<td>
+            <a href="/company/shortlist/${ emp[i].application_id }"><button class="btn btn-success btn-sm">Shortlist</button></a>
+            <a href="/company/reject/${ emp[i].application_id }"><button class="btn btn-danger btn-sm">Reject</button></a>
+             </td></tr>`
+         }else{ 
+            data += `<td><button class="btn ${ emp[i].stage =='rejected'? 'btn-danger':'btn-success'}   btn-sm">${emp[i].stage }</button></td></tr>`
+         }  
+         }
+    }
+    
+if(job_id=="all")
+{
+     for(i=0;i<emp.length;i++)
+    {
+       
+        
+       data +=` <tr><td>${no}</td><td> ${emp[i].emp_name}</td><td> ${emp[i].emp_mobile} </td><td> ${emp[i].emp_email } </td><td><a href="/Resumes/${ emp[i].resume_file}"> ${emp[i].resume_file} </a></td> `
+        no++;
+       if( emp[i].stage =="applied")
+        { 
+            data += `<td>
+            <a href="/company/shortlist/${ emp[i].application_id }"><button class="btn btn-success btn-sm">Shortlist</button></a>
+            <a href="/company/reject/${ emp[i].application_id }"><button class="btn btn-danger btn-sm">Reject</button></a>
+             </td></tr>`
+         }else{ 
+            data += `<td><button class="btn  ${ emp[i].stage =='rejected'? 'btn-danger':'btn-success'}    btn-sm">${emp[i].stage }</button></td></tr>`
+         }  
+        
+    }
+}    
+     
+
+      document.getElementById('applicant_table').innerHTML = data
+    }
+
+
+    change();
+
+
+
+
+
+
+
+
+   
+</script>
+<%- include("footer.ejs") %>

@@ -1,0 +1,28 @@
+<%- include("navbar.ejs") %>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h1>Register Company</h1>
+            <form action="/save_comp" method="post">
+                <label>Company Name :-</label><br><br>
+                <input class="w-75" type="text" name="comp_name"><br><br>
+                <label>Location :-</label><br><br>
+                <input class="w-75" type="text" name="location"><br><br>
+                <label>Hr Name :-</label><br><br>
+                <input class="w-75" type="text" name="hr_name"><br><br>
+                <label>Hr Designation :-</label><br><br>
+                <input class="w-75" type="text" name="hr_designation"><br><br>
+                <label>Hr Mobile :-</label><br><br>
+                <input class="w-75" type="number" name="hr_mobile"><br><br>
+                <label>Hr Email :-</label><br><br>
+                <input class="w-75" type="email" name="hr_email" required><br><br>
+                <label>Hr Password :-</label><br><br>
+                <input class="w-75" type="password" name="password" required ><br><br>
+                <button class="btn btn-primary">Register</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<%- include("footer.ejs") %>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Employee Profile</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-light">
+
+<div class="container mt-5 mb-5">
+  <div class="row justify-content-center">
+    <div class="col-8">
+
+      <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">Employee Profile</h5>
+        </div>
+
+        <div class="card-body">
+          <form action="/employee/save_profile" method="post">
+
+            <!-- Personal Info -->
+            <h6 class="text-primary mb-3">Personal Information</h6>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Full Name</label>
+                <input type="text" class="form-control" name="name" value="<%- data[0].emp_name %>">
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Date of Birth</label>
+                <input type="date" class="form-control" name="dob" value="<%- data[0].emp_dob %>">
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Mobile</label>
+                <input type="tel" class="form-control" name="mobile" value="<%- data[0].emp_mobile %>">
+              </div>
+ 
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Alternative Mobile</label>
+                <input type="tel" class="form-control" name="alternative_mobile" value="<%- data[0].alternative_mobile %>">
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" value="<%- data[0].emp_email %>">
+              </div>
+
+              
+            </div>
+
+            <!-- Address -->
+            <h6 class="text-primary mt-4 mb-3">Address</h6>
+            <div class="row">
+              <div class="col-md-8 mb-3">
+                <label class="form-label">Address</label>
+                <textarea class="form-control" name="address" ><%- data[0].emp_address %></textarea>
+              </div>
+
+              <div class="col-md-4 mb-3">
+                <label class="form-label">Pincode</label>
+                <input type="text" class="form-control" name="pincode" value="<%- data[0].emp_pincode %> ">
+              </div>
+            </div>
+
+            <!-- Professional -->
+            <h6 class="text-primary mt-4 mb-3">Professional Details</h6>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Current Designation</label>
+                <input type="text" class="form-control" name="current_desingnation" value="<%- data[0].current_designation %>">
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Experience (Years)</label>
+                <input type="number" step="0.1" class="form-control" name="expereance_year" value="<%- data[0].experience_year %>">
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Current Salary</label>
+                <input type="number" class="form-control" name="current_salary" value="<%- data[0].current_salary %>">
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Expected Salary</label>
+                <input type="number" class="form-control" name="expected_salary" value="<%- data[0].expected_salary %>">
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Preferred Job Type</label>
+                <select class="form-select" name="prefered_job_type">
+                  <option value="">Select</option>
+                  <option value="full-time" <%- data[0].preferred_job_type=='full-time'? 'selected' : '' %>>Full Time</option>
+                  <option value="part-time" <%- data[0].preferred_job_type=='part-time'? 'selected' : '' %>>Part Time</option>
+                  <option value="internship" <%- data[0].preferred_job_type=='internship'? 'selected' : '' %>>Internship</option>
+                  <option value="freelance" <%- data[0].preferred_job_type=='freelance'? 'selected' : '' %>>Freelance</option>
+                  <option value="contract" <%- data[0].preferred_job_type=='contract'? 'selected' : '' %>>Contract</option>
+                </select>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Preferred Location</label>
+                <input type="text" class="form-control" name="preferred_location" value="<%- data[0].preferred_location %>">
+              </div>
+            </div>
+
+            <!-- Skills -->
+            <h6 class="text-primary mt-4 mb-3">Skills & Links</h6>
+            <div class="row">
+              <div class="col-md-12 mb-3">
+                <label class="form-label">Skill Summary</label>
+                <textarea class="form-control" name="skill_summary"><%- data[0].skill_summary %></textarea>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Languages Known</label>
+                <input type="text" class="form-control" name="languages_known" value="<%- data[0].languages_known %>">
+              </div>
+
+             
+
+              <div class="col-md-6 mb-3">
+                <label class="form-label">LinkedIn URL</label>
+                <input type="url" class="form-control" name="linkedin_url" value="<%- data[0].linkedin_url %>">
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Portfolio URL</label>
+                <input type="url" class="form-control" name="portfolio_url" value="<%- data[0].portfolio_url %>">
+              </div>
+            </div>
+
+            <!-- Status -->
+            <div class="row mt-3">
+              <div class="col-md-6">
+                <label class="form-label">Marital Status</label>
+                <select class="form-select" name="married_status">
+                  <option value="">Select</option>
+                  <option value="single" <%- data[0].emp_married_status=='single'?'selected' : '' %>>Single</option>
+                  <option value="married" <%- data[0].emp_married_status=='married'?'selected' : '' %>>Married</option>
+                </select>
+              </div>
+
+              
+            </div>
+
+            <!-- Submit -->
+            <div class="text-end mt-4">
+              <button class="btn btn-primary px-5">Save Profile</button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

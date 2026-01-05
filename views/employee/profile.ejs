@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Employee Profile</title>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" ></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" ></script>
+   
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+<style>
+body{
+    background:#f5f7fb;
+    font-family:'Segoe UI', sans-serif;
+}
+.profile-card{
+    max-width:850px;
+    margin:auto;
+    border-radius:12px;
+    box-shadow:0 4px 14px rgba(0,0,0,0.08);
+}
+.avatar{
+    width:80px;
+    height:80px;
+    border-radius:50%;
+    border:3px solid #e9ecef;
+}
+.status-badge{
+    background:#1d6efd;
+}
+.skill-badge{
+    background:#6c757d;
+}
+.edit-btn{
+    border:1px solid #1d6efd;
+}
+.edit-btn:hover{
+    background:#1d6efd;
+    color:#fff;
+}
+.download-btn{
+    border:1px solid #198754;
+    color:#198754;
+}
+.download-btn:hover{
+    background:#198754;
+    color:#fff;
+}
+</style>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg bg-white shadow-sm px-4">
+  <div class="container-fluid">
+
+    <!-- Logo -->
+    <a class="navbar-brand fw-bold d-flex align-items-center" href="/employee">
+      <i class="fa-solid fa-briefcase me-2 text-primary"></i>
+      JobPortal
+    </a>
+
+    <!-- Mobile Toggle -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Menu -->
+    <div class="collapse navbar-collapse" id="navbarMenu">
+      <ul class="navbar-nav ms-4 me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active fw-semibold" href="/employee">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fw-semibold" href="/employee">Jobs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fw-semibold" href="/employee/applications">Applications</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fw-semibold" href="/employee/profile">Profile</a>
+        </li>
+      </ul>
+
+      <!-- User Dropdown -->
+      <div class="dropdown">
+        <a class="d-flex align-items-center text-decoration-none dropdown-toggle"
+           href="#" data-bs-toggle="dropdown">
+          <i class="fa-regular fa-user fs-5 me-2"></i>
+          <span class="fw-semibold text-primary"><%- data[0].emp_name %></span>
+        </a>
+
+        <ul class="dropdown-menu dropdown-menu-end shadow">
+          <li><a class="dropdown-item" href="/employee/profile">My Profile</a></li>
+          <li><a class="dropdown-item" href="#">Settings</a></li>
+          <li><hr class="dropdown-divider"></li>
+          <li><a class="dropdown-item text-danger" href="/employee/logout">Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<div class="container py-5">
+<div class="card profile-card p-4">
+
+<!-- Header -->
+<div class="d-flex justify-content-between align-items-start mb-3">
+    <div class="d-flex align-items-center">
+      <% if(data[0].emp_profile_photo===null){ %>
+       <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" class="avatar me-3" onclick="uploadphoto()">
+       <% }else{ %>
+
+              <img src="/profile_photo/<%- data[0].emp_profile_photo %>" class="avatar me-3" onclick="uploadphoto()">
+     
+        <% } %>
+        <div>
+            <h4 class="fw-bold mb-0"><%- data[0].emp_name %></h4>
+            <small class="text-muted"><%- data[0].current_designation %></small><br>
+            <span class="badge status-badge mt-1"><%- data[0].emp_status %></span>
+        </div>
+    </div>
+    <a href="/employee/edit_profile">
+    <button class="btn edit-btn">
+        <i class="fa fa-pen"></i> Edit Profile
+    </button>
+    </a>
+</div>
+
+<hr>
+
+<!-- Info -->
+<div class="row mb-4">
+    <div class="col-md-6">
+        <p class="fw-semibold mb-1">Email</p>
+        <p class="text-muted"><%- data[0].emp_email %></p>
+
+        <p class="fw-semibold mb-1">Location</p>
+        <p class="text-muted"><%- data[0].emp_address %> - <%- data[0].emp_pincode %></p>
+    </div>
+
+    <div class="col-md-6">
+        <p class="fw-semibold mb-1">Phone</p>
+        <p class="text-muted"><%- data[0].emp_mobile %></p>
+
+        <p class="fw-semibold mb-1">Experience</p>
+        <p class="text-muted"><%- data[0].experience_year %> years</p>
+    </div>
+</div>
+
+<!-- Skills -->
+<h6 class="fw-bold">Skills</h6>
+<div class="mb-4">
+    <span class="badge skill-badge me-1"><%- data[0].skill_summary %></span>
+   
+</div>
+
+<!-- Education -->
+<h6 class="fw-bold">Education <a href="/employee/add_education"><button class="btn btn-outline-primary float-end">Add Aducation </button></a></h6>
+
+<% for(var i=0;i<education.length ;i++){ %>
+
+<div class="mb-4 mt-2">
+    <p class="mb-1 fw-semibold"><%- education[i].course_title %> <a href="/employee/delet_edu/<%- education[i].edu_id %>"><i class="fa-solid fa-trash text-danger" style="float: right;"></i></a><a href="/employee/edit_edu/<%- education[i].edu_id %>"><i class="fa-solid fa-pencil" style="float: right;margin-right: 20px;"></i></a></p> 
+    
+    <small class="text-muted"><%- education[i].univercity %></small>
+</div>
+
+<% } %>
+
+<!-- Resume -->
+ <a href=" /Resumes/<%- data[0].emp_resume %>">
+<button class="btn download-btn">
+    <i class="fa fa-download"></i> Download Resume
+</button>
+</a>
+
+</div>
+</div>
+
+
+<!-- modal -->
+
+<div class="modal" tabindex="-1" id="upload_profile_photo">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Upload Profile Photo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/employee/upload_profile_photo" method="post" enctype="multipart/form-data">
+            <input type="number" hidden name="job_id" id="hid">
+            Upload Profile Photo  :- <br> <br>
+            <input type="file" name="profile_photo" class="form-control"><br>
+     
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Upload</button>
+      </div>
+         </form>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  function uploadphoto()
+  {
+    $("#upload_profile_photo").modal("show")
+  }
+</script>
+</body>
+</html>
+

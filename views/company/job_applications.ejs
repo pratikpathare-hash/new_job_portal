@@ -1,0 +1,30 @@
+<%- include("navbar.ejs") %>
+<table class="table table-border">
+    <tr>
+        <th>Sr No</th>
+        <th>Employee Name</th>
+        <th>Employee Email</th>
+        <th>Employee Mobile</th>
+        <th>Resume</th>
+        <th>Status</th>
+    </tr>
+    <% for(var i=0;i<data.length;i++){ %>
+    <tr>
+        <td><%- i+1 %></td>
+        <td><%- data[i].emp_name %></td>
+        <td><%- data[i].emp_email %></td>
+        <td><%- data[i].emp_mobile %></td>
+        <td><a href="/Resumes/<%- data[i].resume_file %>"><%- data[i].resume_file %></a></td>
+        <% if( data[i].stage =="applied"){ %>
+        <td>
+            <a href="/company/shortlist/<%- data[i].application_id %>"><button class="btn btn-success btn-sm">Shortlist</button></a>
+            <a href="/company/reject/<%- data[i].application_id %>"><button class="btn btn-danger btn-sm">Reject</button></a>
+        </td>
+        <% }else{ %>
+            <td><button class="btn <%- data[i].stage=='rejected'? 'btn-danger':'btn-success'  %> btn-sm"><%- data[i].stage %></button></td>
+        <% } %>
+    </tr>
+    <% } %>
+</table>
+
+<%- include("footer.ejs") %>

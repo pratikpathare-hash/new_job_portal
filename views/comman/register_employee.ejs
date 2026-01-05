@@ -1,0 +1,21 @@
+<%- include("navbar.ejs") %>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6 border p-3 mt-3">
+            <h1>Employee Register</h1>
+            <form action="/save_employee" method="post">
+                <label>Employee Name:-</label><br><br>
+                <input class="w-75" type="text" name="name" ><br><br>
+                <label>Email :-</label><br><br>
+                <input class="w-75" type="email" name="email" required><br><br>
+                <label>mobile no:-</label><br><br>
+                <input class="w-75" type="number" name="mobile"><br><br>
+                <label>Password:-</label><br><br>
+                <input class="w-75" type="password" name="password" required ><br><br>
+                <button class="btn btn-outline-primary">Register Here</button>
+            </form>
+        </div>
+    </div>
+</div>
+<%- include("footer.ejs") %>
