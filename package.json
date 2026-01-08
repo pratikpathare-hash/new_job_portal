@@ -7,5 +7,24 @@
     "express-session": "^1.18.2",
     "mysql2": "^3.16.0",
     "nodemailer": "^7.0.12"
-  }
+  },
+  "name": "new_job_portal",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pratikpathare-hash/new_job_portal.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pratikpathare-hash/new_job_portal/issues"
+  },
+  "homepage": "https://github.com/pratikpathare-hash/new_job_portal#readme"
 }
